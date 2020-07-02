@@ -18,7 +18,7 @@ class ItemTableSeeder extends Seeder
             DB::table('items')->insert([
                 'name' => Str::random(5),
                 'catalog_number' => Str::random(5),
-                'price' => 10,
+                'price' => rand(),
                 'has_vat' => false,
                 'enable' => true,
             ]);

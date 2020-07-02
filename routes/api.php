@@ -13,12 +13,36 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// phpinfo();
+// Route::group(['middleware' => 'cors'], function() {
+//     Route::get('ping', function () {
+//         return 'pong';
+//     });
 
-// Route::get('get', 'ExerciseController');
-// Route::post('get', 'ExerciseController');
-// Route::put('get', 'ExerciseController');
-// Route::delete('get', 'ExerciseController');
+//     Route::resource('clients', 'ClientController');
+//     Route::get('clients/{client}/items', 'ClientController@getClientItems');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+//     Route::resource('items', 'ItemController');
+
+//     Route::resource('diversities', 'DiversityController');
+//     Route::get('diversities/{id}', 'DiversityController@findByClient');
+
+//     Route::resource('items_diversities', 'ItemDiversityController');
+
+// });
+
+Route::get('ping', function () {
+    return 'pong';
 });
+
+Route::resource('clients', 'ClientController');
+Route::get('clients/{client}/items', 'ClientController@getClientItems');
+
+
+Route::resource('items', 'ItemController');
+
+Route::resource('diversities', 'DiversityController');
+Route::get('diversities/{id}', 'DiversityController@findByClient');
+
+Route::resource('items_diversities', 'ItemDiversityController');
