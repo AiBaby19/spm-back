@@ -38,8 +38,8 @@ class ItemController extends Controller
     {
         $itemInfo = $request->all();
         $item = new Item($itemInfo);
-        $item->catalog_number = $itemInfo['catalogNum'] ?? null;
-        $item->has_vat = $itemInfo['hasVat'] ?? null;
+        $item->catalog_number = $itemInfo['catalogNum'] ?? false;
+        $item->has_vat = $itemInfo['hasVat'] ?? false;
         $item->save();
 
         return ItemController::index();
@@ -77,10 +77,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        dd($item);
-        $ItemInfo = $request->all();
-        $item->update($ItemInfo);
+
+        $itemInfo = $request->all();
+        // dd($itemInfo);
+        $item->catalog_number = $itemInfo['catalogNum'];
+        $item->has_vat = $itemInfo['hasVat'];
+        $item->update($itemInfo);
         $item->save();
+        return new ItemCollection(Item::all());
     }
 
     /**
