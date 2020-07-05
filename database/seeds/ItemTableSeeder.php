@@ -14,7 +14,7 @@ class ItemTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             DB::table('items')->insert([
                 'name' => Str::random(5),
                 'catalog_number' => Str::random(5),

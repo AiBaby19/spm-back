@@ -10,6 +10,6 @@ class Client extends Model
 
     public function diversities()
     {
-        return $this->belongsToMany('App\Models\Diversity', 'id');
+        return $this->belongsToMany('App\Models\Diversity');
     }
 }

@@ -12,22 +12,22 @@ class ClientDiversityTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('clients_diversities')->insert([
-            'client_id' => 10,
-            'diversity_id' => 5,
+        DB::table('client_diversity')->insert([
+            'client_id' => 1,
+            'diversity_id' => 1,
         ]);
 
-        DB::table('clients_diversities')->insert([
+        DB::table('client_diversity')->insert([
             'client_id' => 12,
             'diversity_id' => 5,
         ]);
 
-        DB::table('clients_diversities')->insert([
+        DB::table('client_diversity')->insert([
             'client_id' => 13,
             'diversity_id' => 5,
         ]);
 
-        DB::table('clients_diversities')->insert([
+        DB::table('client_diversity')->insert([
             'client_id' => 13,
             'diversity_id' => 2,
         ]);

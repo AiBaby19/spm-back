@@ -15,6 +15,7 @@ class ItemController extends Controller
      */
     public static function index()
     {
+        // dd(Item::has('diversities')->get());
         return new ItemCollection(Item::all());
     }
 
@@ -42,7 +43,11 @@ class ItemController extends Controller
         $item->has_vat = $itemInfo['hasVat'] ?? false;
         $item->save();
 
-        return ItemController::index();
+        $itemInfo['id'] = $item->id;
+
+        if (ItemDiversityController::store($itemInfo)) {
+            return ItemController::index();
+        };
     }
 
 
@@ -77,14 +82,12 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-
         $itemInfo = $request->all();
-        // dd($itemInfo);
         $item->catalog_number = $itemInfo['catalogNum'];
         $item->has_vat = $itemInfo['hasVat'];
         $item->update($itemInfo);
         $item->save();
-        return new ItemCollection(Item::all());
+        return itemController::index();
     }
 
     /**

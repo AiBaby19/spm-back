@@ -14,20 +14,16 @@ class ItemCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        $items = [];
-
-        foreach ($this->collection as $item) {
-
-            array_push($items, [
+        return $this->collection->map(function ($item) {
+            // dd($item);
+            return [
                 'id' => $item->id,
                 'name' => $item->name,
                 'serial' => $item->catalog_number,
                 'price' => $item->price,
                 'vat' => !!$item->has_vat,
                 'enable' => !!$item->enable,
-            ]);
-        }
-
-        return $items;
+            ];
+        });
     }
 }

@@ -15,8 +15,9 @@ class Clients extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('client_diversity_id')->nullable();
             $table->string('name')->unique();
-            $table->enum('type', ['restaurant', 'coffee_house', 'bar']);
+            $table->enum('type', ['restaurant', 'coffee', 'bar']);
             $table->boolean('enable');
             $table->timestamps();
         });

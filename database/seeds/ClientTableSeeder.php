@@ -14,7 +14,7 @@ class ClientTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             DB::table('clients')->insert([
                 'name' => Str::random(5),
                 'type' => 'restaurant',

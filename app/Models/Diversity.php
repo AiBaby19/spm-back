@@ -10,11 +10,11 @@ class Diversity extends Model
 
     public function clients()
     {
-        return $this->belongsToMany('App\Models\Client', 'id');
+        return $this->belongsToMany('App\Models\Clients');
     }
 
     public function items()
     {
-        return $this->belongsToMany('App\Models\Item', 'id');
+        return $this->hasMany(ItemDiversity::class, 'id', 'item_id');
     }
 }

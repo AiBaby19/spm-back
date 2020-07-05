@@ -15,6 +15,7 @@ class Items extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('item_diversity_id')->nullable();
             $table->string('name');
             $table->string('catalog_number')->unique();
             $table->integer('price');

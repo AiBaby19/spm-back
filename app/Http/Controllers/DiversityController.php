@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DiversityCollection;
 use App\Models\Diversity;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class DiversityController extends Controller
      */
     public function index()
     {
-        return Diversity::all();
+        return new DiversityCollection(Diversity::all());
     }
 
     /**
@@ -49,7 +50,7 @@ class DiversityController extends Controller
      */
     public function show(Diversity $diversity)
     {
-        dd($diversity->items, $diversity->clients);
+        // dd($diversity->items, $diversity->clients);
         return $diversity;
     }
 

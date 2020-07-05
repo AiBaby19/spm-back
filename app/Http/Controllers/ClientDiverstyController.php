@@ -33,13 +33,16 @@ class ClientDiversityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public static function store($clientInfo)
     {
-        $data = $request->all();
-        $item_diversity = new ClientDiversity ($data);
-        $item_diversity->diversity_id = $data['diversity_id'];
-        $item_diversity->save();
-        return $item_diversity;
+        foreach ($clientInfo['diversity'] as $cd) {
+            // dd($clientInfo);
+            $clientDiversity = new ClientDiversity();
+            $clientDiversity->client_id = $clientInfo['id'];
+            $clientDiversity->diversity_id = $cd['id'];
+            $clientDiversity->save();
+        }
+        return true;
     }
 
     /**
@@ -48,7 +51,7 @@ class ClientDiversityController extends Controller
      * @param  \App\Models\ClientDiversity  $clientDiversty
      * @return \Illuminate\Http\Response
      */
-    public function show(ClientDiversity $clientDiversiy)
+    public function show(ClientDiversity $clientDiversity)
     {
         //
     }
@@ -71,9 +74,12 @@ class ClientDiversityController extends Controller
      * @param  \App\Models\ClientDiversity  $clientDiversty
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ClientDiversity $clientDiversity)
+    public static function update($clientInfo)
     {
-        //
+        ClientDiversity::where('client_id', $clientInfo['id'])->delete();
+        self::store($clientInfo);
+
+        return true;
     }
 
     /**

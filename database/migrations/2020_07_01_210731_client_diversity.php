@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ClientsDiversities extends Migration
+class ClientDiversity extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class ClientsDiversities extends Migration
      */
     public function up()
     {
-        Schema::create('clients_diversities', function (Blueprint $table) {
+        Schema::create('client_diversity', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('client_id')->nullable();
             $table->unsignedInteger('diversity_id')->nullable();

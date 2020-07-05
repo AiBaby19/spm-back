@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClientCollection;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,9 +14,11 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public static function index()
     {
-        return Client::all();
+        $clients = Client::with('diversities')->get();
+
+        return new ClientCollection($clients);
     }
 
     /**
@@ -25,7 +28,6 @@ class ClientController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -36,10 +38,16 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $clientInfo = $request->post();
+        $clientInfo = $request->all();
         $client = new Client($clientInfo);
         $client->save();
-        return $client;
+
+        $clientInfo['id'] = $client->id;
+
+
+        if (ClientDiversityController::store($clientInfo)) {
+            return ClientController::index();
+        };
     }
 
     /**
@@ -55,7 +63,6 @@ class ClientController extends Controller
 
     public function getClientItems(Client $client)
     {
-
     }
 
     /**
@@ -66,7 +73,6 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-
     }
 
     /**
@@ -78,10 +84,18 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        // use trait for try catch + rollback
         $clientInfo = $request->all();
         $client->update($clientInfo);
         $client->save();
+
+        // dd($clientInfo);
+
+        if (ClientDiversityController::update($clientInfo)) {
+            return ClientController::index();
+        };
+
+        return ClientController::index();
+        // use trait for try catch + rollback
     }
 
     /**
@@ -93,5 +107,6 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         $client->delete();
+        return ClientController::index();
     }
 }

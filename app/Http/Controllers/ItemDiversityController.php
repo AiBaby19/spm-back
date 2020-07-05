@@ -35,13 +35,16 @@ class ItemDiversityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public static function store($clientInfo)
     {
-        $data = $request->all();
-        $item_diversity = new ItemDiversity($data);
-        $item_diversity->diversity_id = $data['diversity_id'];
-        $item_diversity->save();
-        return $item_diversity;
+        foreach ($clientInfo['diversity'] as $cd) {
+            $itemDiversity = new ItemDiversity();
+            $itemDiversity->item_id = $clientInfo['id'];
+            $itemDiversity->diversity_id = $cd['id'];
+            $itemDiversity->save();
+        }
+
+        return true;
     }
 
     /**
